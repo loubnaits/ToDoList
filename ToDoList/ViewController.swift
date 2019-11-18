@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UITableViewController {
 
-    let itemArray = ["Lait", "Oeuf", "Pain"]
+    var itemArray = ["Lait", "Oeuf", "Pain"]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -47,9 +47,47 @@ class ViewController: UITableViewController {
         
  //Design : déselectionner après pressed ? Pk ne fonctionne pas pfffff
         tableView.deselectRow(at: indexPath, animated: true)
+
+        
+    }
+    
+    
+    
+    @IBAction func AddBouton(_ sender: UIBarButtonItem) {
+//contenu de la zone de text
+        var textFild = UITextField()
+        
+//Alert PopUp
+        let alert = UIAlertController(title: "Ajouter un nouvel item", message: "", preferredStyle: .alert)
+        
+//Action bouton popUp et rafraichir l'écran
+        let action = UIAlertAction(title: "Ajouter", style: .default) { (action) in
+            self.itemArray.append(textFild.text!)
+            
+            self.tableView.reloadData()
+        }
+        
+// Zone de texte avec précontenu
+        alert.addTextField { (textFildAlert) in
+            textFildAlert.placeholder = "Saisisez un item"
+            textFild = textFildAlert
+            
+        }
+//action et presenter le new iem
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+    
+        
+
+        
+                    }
+        
+    
+        
         
         
     }
     
-}
+
 
